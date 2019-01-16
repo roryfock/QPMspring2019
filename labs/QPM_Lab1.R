@@ -4,7 +4,7 @@
 #################################
 
 ## Goal:
-# 1. Calculate simple aritmetic
+# 1. Calculate simple arithmetic
 # 2. Assign a value to an object
 # 3. Types of Data
 
@@ -20,12 +20,13 @@
 
 ## 1.1: Install R
 # http://cran.r-project.org/bin/
-# We recommend using R studio because it provides a more user-friendly environment
+# I recommend using R studio because it provides a more user-friendly environment
 # Download from here: http://www.rstudio.com/
 
 
 ## 1.2: Basics
 # It is possible to do some things using the menus, but we will mostly use command line entry.
+# Don't be scared!
 
 ## Layout (Four windows):
 # Editor: Top left window. This is where you type R code to solve the exercises in this course.
@@ -43,9 +44,10 @@ demo("graphics")
 # You can also use "Run" button to execute a single line of code and "Source" button to execute all the codes.
 print("Hello world")
 
-## Comments
+## Commenting
 # Anything that comes after a "#" sign.
 # Comments describe what the code is doing.
+# I try very hard to use descriptive comments
 
 ## Features
 # Everything in R is object oriented. Data, functions, inputs and outputs will all be data objects.
@@ -56,16 +58,27 @@ print("Hello world")
 
 
 ## 1.3: R as a calculator
-# Basic arithmatic
-2 + 3  #addition
-2*3  # multiplication
-5/3 #division
-4 - 5 #subtraction
-3^3 # exponents
-625^(1/4) # More exponents
-11%% 2 # modular arithmatic (11 mod 2)
-31 %/% 7 # The integer part of a fraction
-log(10) # natural log
+# Basic arithmetic
+# addition
+2 + 3
+# multiplication
+2*3  
+# division
+5/3 
+# subtraction
+4 - 5
+# exponents
+3^3 
+# more exponents
+625^(1/4)
+# modular arithmetic (11 mod 2)
+# "wrap around": 11am + 2 hours = 1pm
+11%% 2 
+# The integer part of a fraction
+# how many 7s go into 31?
+31 %/% 7
+# natural log
+log(10) 
 # R follows order of operation
 3+4/2 
 (3+4)/2 
@@ -88,11 +101,13 @@ NULL # Nothing.
 1/0 # Inf means infinity
 
 
-### Note: Use the up and down arrows to access previously typed commands
+### Note: Use the up and down arrows 
+# in the "Console" to access previously typed commands
 
 
 ## 1.4: Objects and named storage
 # The "<-" and "=" symbols are used to assign a variable to a value.
+# My personal preference is "<-".
 # Create a and b that take on the values of 7 and 8.
 a <- 7
 b = 8 
@@ -102,27 +117,40 @@ print(b)
 # or simply
 a
 b
-a + 3 # we can perform all of the mathematical functions on a now as if it is any other number
+
+# we can perform all of the mathematical functions on a now as if it is any other number
+a + 3
 c <- 30
 a + b + c
-# Object names cannot start with numbers
+
+# Object names cannot start with numbers!!
 06election <-50000 ## no
+
 # You can overide previous code by assigning altenative values.
 y <- 3
 y
 x <- (y-8) + 7
 x
-x <- 4 # change the assignment
+
+# change the assignment
+x <- 4 
 x
 
 # Vectors: a sequence of data elements of the same basic type.
-c(1,4,9) # Command c() returns a vector of numbers.
+# Command c() returns a vector of numbers.
+c(1,4,9)
+
 # multiplying a vector by a constant multiplies each of the numbers in the vector by that constant
 c(1, 4, 9)*4
+
 # likewise for other arithmetic functions
 c(1, 4, 9) + 4
 c(1, 4, 9) - 4
 c(1, 4, 9) / 4
+
+# store a vector
+
+x <- c(1,4,9)
 
 #########
 # Task 2: 
@@ -130,7 +158,7 @@ c(1, 4, 9) / 4
 
 # Assign the value 100 to x
 
-## more example:
+## more example: turnout in Alaska
 total.votes.ak <-  238307
 voting.age.population.ak <- 496387
 turnout.ak <-total.votes.ak/voting.age.population.ak
@@ -144,7 +172,8 @@ turnout.ak
 # 2) Add these two variables together
 
 
-## Named objects are stored in the "global environment", which means that they can be accessed at any time by any function you might run.
+## Named objects are stored in the "global environment", 
+# which means that they can be accessed at any time by any function you might run.
 ## They are "global" variables (which makes them different from "local" variables).
 
 objects() # List the objects currently on your global
@@ -172,7 +201,25 @@ rm(list=ls())
 .x<-"Hide me"
 print(.x)
 ls()
+
 ## Note: anything that starts with a "." will be there, but are hidden
+
+# Best way to remove everything: start a new R session by quiting Rstudio
+
+# Or, this function, which removes all packages, datasets,
+# functions, or utilities floating around in your session:
+# remove objects
+rm(list=ls())
+# detach all libraries
+detachAllPackages <- function() {
+  basic.packages <- c("package:stats","package:graphics","package:grDevices",
+                      "package:utils","package:datasets","package:methods","package:base")
+  package.list <- search()[ifelse(unlist(gregexpr("package:",search()))==1,TRUE,FALSE)]
+  package.list <- setdiff(package.list,basic.packages)
+  if (length(package.list)>0)  for (package in package.list) detach(package, character.only=TRUE)
+}
+detachAllPackages()
+
 
 #########
 # Task 4: 
@@ -205,6 +252,7 @@ logic
 
 ## Save your code as a script using a ".R" file extension to a specific folder.
 ## The file that you are reading now is the code file, usually saved with a .R extension.
+## I will need your .R files for problem sets so that I can replicate your work.
 
 ####################
 ## 2 What is GitHub?
